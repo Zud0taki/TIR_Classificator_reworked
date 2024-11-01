@@ -2,6 +2,7 @@ import sys
 import getopt
 import glob
 import cv2 as cv
+# from Threshold import process_thresholding
 from Threshold import process_thresholding
 import time
 

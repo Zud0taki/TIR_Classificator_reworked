@@ -6,7 +6,7 @@ import fiona
 # used to export the shapefile
 def ShapeWrite(acml_list, threshold, outputpath):  #temperature
     # set the file name
-    polygon_name = r"" + outputpath + "/" + str(int(threshold)) + ".shp"  # str(temperature) + "dn - " + "above" + "°C"
+    polygon_name = r"" + outputpath + "/" + str(int(threshold)) + "_.shp"  # str(temperature) + "dn - " + "above" + "°C"
     # initialize xy_list
     xy_list = []
     # give the Shapefile a schema
