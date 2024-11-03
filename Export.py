@@ -2,11 +2,18 @@
 import fiona
 
 
+def get_temp(threshold):
+    temp = (threshold - 30000) / 100  # 30000dn == 0°C every 100dn == 1°C
+    return temp
+
+
 # define ShapeWrite
 # used to export the shapefile
-def ShapeWrite(acml_list, threshold, outputpath):  #temperature
+def ShapeWrite(acml_list, threshold, outputpath):  # temperature
+    # get the temp from threshold
+    temperature = get_temp(threshold)
     # set the file name
-    polygon_name = r"" + outputpath + "/" + str(int(threshold)) + "_.shp"  # str(temperature) + "dn - " + "above" + "°C"
+    polygon_name = r"" + outputpath + "/" + str(int(threshold)) + "dn_around_" + str(temperature) + "°C" + ".shp"  # str(temperature) + "dn - " + "above" + "°C"
     # initialize xy_list
     xy_list = []
     # give the Shapefile a schema
@@ -21,14 +28,6 @@ def ShapeWrite(acml_list, threshold, outputpath):  #temperature
     # iterate through the acml_list
     for x in range(len(acml_list)):
         # if seprator is not found - append xy_list
-        if x == 227:
-            bla = acml_list[x]
-            dla = acml_list[x][0]
-            vla = acml_list[x][0][0]
-        if x == 226:
-            bla = acml_list[x]
-            dla = acml_list[x][1]
-            vla = acml_list[x][1][0]
         if acml_list[x][1][0] != 0:
             xy_list.append((acml_list[x][1][1], acml_list[x][1][0]))
         # if seperator is found - count up - set counter as polygon id and save to the polyShp-Object

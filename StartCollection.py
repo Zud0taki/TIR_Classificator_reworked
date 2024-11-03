@@ -3,7 +3,7 @@ import getopt
 import glob
 import cv2 as cv
 # from Threshold import process_thresholding
-from Threshold import process_thresholding
+from AdaptedThreshold import process_thresholding
 import time
 
 
@@ -78,4 +78,5 @@ if __name__ == "__main__":
     print(str(len(read_img)))
     process_thresholding(read_img, coord_input, threshold, outputpath)
     tic = time.time()
+    print(f"{bcolors.OKGREEN}FINISHED | time needed for processing:{bcolors.ENDC}")
     print(tic - tac)
