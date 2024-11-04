@@ -19,6 +19,7 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
+# method to collect arguments from user
 def collect_args(argv):
     inputpath: str = ''
     outputpath: str = ''
@@ -47,6 +48,7 @@ def collect_args(argv):
     return inputpath, outputpath, threshold
 
 
+# method to collect all inputs from inputpath
 def read_inputs(input_path):
     img_input = glob.glob(input_path + "/*.tif")
     coord_input = glob.glob(input_path + "/*txt")
@@ -59,6 +61,7 @@ def read_inputs(input_path):
         print("uneven input lengths between images and coord-files")
 
 
+# method to read images from image_input
 def read_images(img_input):
     read_img = []
     for img in img_input:
@@ -76,7 +79,8 @@ if __name__ == "__main__":
     read_img = read_images(img_input)
     print(f"{bcolors.OKBLUE}INFO | start processing the following number of images:{bcolors.ENDC}")
     print(str(len(read_img)))
-    process_thresholding(read_img, coord_input, threshold, outputpath)
+    number_of_polygons = process_thresholding(read_img, coord_input, threshold, outputpath)
     tic = time.time()
-    print(f"{bcolors.OKGREEN}FINISHED | time needed for processing:{bcolors.ENDC}")
+    print(f"{bcolors.OKGREEN}FINISHED | time needed for processing: " + str("%.3f" % (tic-tac)) + "s" + f"{bcolors.ENDC}")
+    print(f"{bcolors.OKGREEN}FINISHED | found the following number of polygons: " + str(number_of_polygons) + f"{bcolors.ENDC}")
     print(tic - tac)
