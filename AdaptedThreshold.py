@@ -114,7 +114,7 @@ def process_thresholding(read_img, coord_input, threshold, output_path):
                 counter += 1
         tic = time.time()
         took = tic-tac
-        print(f"{bcolors.WARNING}PROCESS | " + str(f + 1) + "/" + str((len(read_img))) + " in: " + str("%.3f" % took) + "s found hotspots: " + str(counter))
+        print(f"{bcolors.WARNING}PROCESS | " + str(f + 1) + "/" + str((len(read_img))) + " in: " + str("%.3f" % took) + "s found hotspots: " + str(counter)+f"{bcolors.ENDC}")
         nrpol = getNumberOfPolygons(acml_list)
 
     # get the data of the accumulated list, the treshold value, the temperature value and the outputpath
