@@ -6,11 +6,10 @@ A small tool to analyse TIR-imagery for a given threshold.
 
 Download the code from one of these sources:
 * https://github.com/Zud0taki/TIR_Classificator_reworked.git
-* https
+* https://gitlab.dlr.de/os-sec-dev-modules/python/-/tree/main/TIR_Classificator
 
 Create a virtual environment and install dependencies via:
  > pip install -r requirements.txt
- >
 
 ## Usage
 
@@ -25,12 +24,13 @@ Select all images and export as "TIF images (16bit) + coords-files"
 ![Mosaica Operation](additional_files/mosaica_operation.gif)
 
 To be able to use the tool all files (.tif and .txt) have to be in the same input-folder.
+
 It needs to look something like this:
 
 ![image of a configuration](additional_files/input_folder.png)
 
 You can use the tool two ways - either via command-line:
-> cd <project-root>
+> cd to project-root
 >
 > .\StartCollection -i (inputpath) -o (outputpath) -t (threshold)
 
