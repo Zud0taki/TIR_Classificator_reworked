@@ -1,4 +1,6 @@
 import time
+
+import cv2 as cv
 import numpy as np
 import random
 from CheckNeighborhood import check_nbh
@@ -54,7 +56,7 @@ def process_thresholding(read_img, coord_input, threshold, output_path):
                 y_row = img[height]
                 if max(y_row) > _threshold:
                     for width in range(0, dimX - 1):
-                        if img[height, width] > _threshold and label_mat[height, width] <1:
+                        if img[height, width] > _threshold and label_mat[height, width] < 1:
                             label = label + 1
                             # if the threshold is exceeded and the pixel is not labeled yet - check pixel 3X3-neighborhood
                             label_mat = check_nbh(img, label_mat, label, _threshold, width, height)
@@ -69,6 +71,10 @@ def process_thresholding(read_img, coord_input, threshold, output_path):
             #     for y in range(img.shape[0]):
             #         if label_mat[y, x] > 0:
             #             label_img[y, x, :] = labelclr[(label_mat[y, x] - 1), :]
+            # label_img = cv.resize(label_img, (1600, 300))
+            # label_img = cv.rotate(label_img, cv.ROTATE_90_CLOCKWISE)
+            # cv.imshow("Test", label_img)
+            # cv.waitKey()
 
             # initiate pts
             pts = []
@@ -84,6 +90,7 @@ def process_thresholding(read_img, coord_input, threshold, output_path):
                 for x in range(label_mat.shape[1]):
                     for y in range(label_mat.shape[0]):
                         if label_mat[y, x] == checked_label_list[counter]:
+                            debug_label_behind_line_above = checked_label_list[counter]
                             pts.append([y, x])
 
                 # check in pts if the pixelgroups are non-linear
@@ -94,7 +101,7 @@ def process_thresholding(read_img, coord_input, threshold, output_path):
                     # calculate hull-coordinates of the polygon
                     ch = ConcaveHull()
                     ch.loadpoints(pts)
-                    ch.calculatehull()
+                    ch.calculatehull(tol=5)
                     boundary_points = np.vstack(ch.boundary.exterior.coords.xy).T
                     # use boundary points and the homography to get the transformed boundary points
                     # real world coordinates
@@ -106,12 +113,12 @@ def process_thresholding(read_img, coord_input, threshold, output_path):
                     acml_list.append([[0, 0], [0, 0, 0]])
                     pts.clear()
                     counter += 1
-                    # cv2.waitKey()
-                    # cv2.imshow('label_img', label_img_1)
+                    # cv.waitKey()
+                    # cv.imshow('label_img', label_img_1)
                 # if the condition in the beginning is not fullfilled - empty points for the next cycle
                 else:
                     pts.clear()
-                counter += 1
+                    counter += 1
         tic = time.time()
         took = tic-tac
         nrpol = getNumberOfPolygons(acml_list)

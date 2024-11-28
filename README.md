@@ -6,7 +6,7 @@ A small tool to analyse TIR-imagery for a given threshold.
 
 Download the code from one of these sources:
 * https://github.com/Zud0taki/TIR_Classificator_reworked.git
-* https://gitlab.dlr.de/os-sec-dev-modules/python/-/tree/main/TIR_Classificator
+* https://gitlab.dlr.de/os-sec-dev-modules/python/-/tree/main/Tools/TIR_Classificator
 
 Create a virtual environment and install dependencies via:
  > pip install -r requirements.txt
