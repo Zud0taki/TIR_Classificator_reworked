@@ -32,7 +32,7 @@ It needs to look something like this:
 You can use the tool two ways - either via command-line:
 > cd to project-root
 >
-> .\StartCollection -i (inputpath) -o (outputpath) -t (threshold)
+> .\StartCollection.py -i (inputpath) -o (outputpath) -t (threshold)
 
 or with a configuration, setting the parameters like this:
 
